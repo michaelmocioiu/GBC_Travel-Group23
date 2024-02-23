@@ -6,7 +6,6 @@ namespace GBC_Travel_Group23.Controllers
     {
         public IActionResult Index()
         {
-            System.Console.WriteLine("aa");
             return View();
         }
     }
