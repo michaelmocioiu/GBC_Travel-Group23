@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>GBC_Travel_Group23</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="Views\Home\" />
+    <Folder Include="Views\Booking\" />
+    <Folder Include="Views\Listing\" />
+    <Folder Include="Views\Search\" />
+  </ItemGroup>
+
+</Project>
