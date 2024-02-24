@@ -1,4 +1,5 @@
-﻿using Mono.TextTemplating;
+﻿using Microsoft.EntityFrameworkCore;
+using Mono.TextTemplating;
 using System.ComponentModel.DataAnnotations;
 namespace GBC_Travel_Group23.Models
 {
@@ -16,14 +17,14 @@ namespace GBC_Travel_Group23.Models
         public HotelRoom? GetPriciestRoom()
         {
             return Rooms
-                .OrderByDescending(seat => seat.NightlyRate)
+                .OrderByDescending(seat => seat.Rate)
                 .FirstOrDefault();
         }
 
         public HotelRoom? GetCheapestRoom()
         {
             return Rooms
-                .OrderBy(seat => seat.NightlyRate)
+                .OrderBy(seat => seat.Rate)
                 .FirstOrDefault();
         }
     }
@@ -33,7 +34,12 @@ namespace GBC_Travel_Group23.Models
         [Required] public int RoomNumber { get; set; }
         [Required] public int BedCount { get; set; }
         [Required] public int BathCount { get; set; }
+        [Required] public int Capacity { get; set; }//added capacity to the rooms
         [Required] public string[] Amenities { get; set; }
-        [Required] public double NightlyRate { get; set; }
+        [Required] public double Rate { get; set; }
+
+
+        
+
     }
 }

@@ -8,7 +8,7 @@
         public double SeatPrice { get; set; }
         public void BookSeat()
         {
-            AvailableSeating--;
+            if (AvailableSeating > 0)AvailableSeating--;
         }
     }
 }

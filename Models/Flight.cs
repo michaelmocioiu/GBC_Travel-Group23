@@ -24,12 +24,19 @@ namespace GBC_Travel_Group23.Models
 
         public void BookSeat(string type)
         {
+            var targeCabin = Cabins.FirstOrDefault(cabin => cabin.CabinType == type);
+            targeCabin?.BookSeat();
+            //Safelycall BookSeat only if targetCabin is not null
+
+
+            /*
             FlightCabin targetCabin = Cabins.FirstOrDefault(cabin => cabin.CabinType == type)!;
 
             if (targetCabin != null && targetCabin.AvailableSeating > 0)
             {
                 targetCabin.BookSeat();
             }
+            */
         }
 
     }
