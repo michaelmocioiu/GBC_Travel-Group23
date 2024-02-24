@@ -1,15 +1,20 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Numerics;
 namespace GBC_Travel_Group23.Models
 {
-    public class Booking
+    public abstract class Booking
     {
-        public int BookingId { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+    }
 
-        [Required]
-        public string UserId { get; set; }
-
-        [Required]
-        public Service Service { get; set; }
+    public class FlightBooking : Booking
+    {
+        public int TicketCount { get; set; }
+        public int FlightId { get; set; }
+        public int CabinId { get; set; }
     }
 }

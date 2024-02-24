@@ -1,41 +1,36 @@
-﻿using System;
+﻿using Microsoft.Extensions.Primitives;
+using System;
 using System.ComponentModel.DataAnnotations;
 namespace GBC_Travel_Group23.Models
 {
     public class Flight : Service
     {
-        [Required]
-        public string DepartureCity { get; set; }
+        [Required] public string DepartureAirportCode { get; set; }
+        [Required] public string DepartureCity { get; set; }
+        [Required] public string DepartureCountry { get; set; }
+        [Required] public string ArrivalAirportCode { get; set; }
+        [Required] public string ArrivalCity { get; set; }
+        [Required] public string ArrivalCountry { get; set;}
+        [Required] public List<FlightCabin> Cabins { get; set; }
 
-        [Required]
-        public string ArrivalCity { get; set; }
-
-        [Required]
-        public List<FlightSeat> Seats { get; set; }
-
-        public FlightSeat? GetPriciestAvailableSeat()
+        public int MaxSeating
         {
-            return Seats
-                .Where(seat => seat.IsAvailable)
-                .OrderByDescending(seat => seat.Price)
-                .FirstOrDefault();
+            get { return Cabins.Sum(cabin => cabin.MaxSeating); }
+        }
+        public int AvailableSeats
+        {
+            get { return Cabins.Sum(cabin => cabin.AvailableSeating); }
         }
 
-        public FlightSeat? GetCheapestAvailableSeat()
+        public void BookSeat(string type)
         {
-            return Seats
-                .Where(seat => seat.IsAvailable)
-                .OrderBy(seat => seat.Price)
-                .FirstOrDefault();
+            FlightCabin targetCabin = Cabins.FirstOrDefault(cabin => cabin.CabinType == type)!;
+
+            if (targetCabin != null && targetCabin.AvailableSeating > 0)
+            {
+                targetCabin.BookSeat();
+            }
         }
 
-    }
-
-    public class FlightSeat
-    {
-        public int SeatNumber { get; set; }
-        public string SeatClass { get; set; }
-        public decimal Price { get; set; }
-        public bool IsAvailable { get; set; }
     }
 }
