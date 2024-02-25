@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace GBC_Travel_Group23.Models
 {
     public class Flight
@@ -17,5 +18,8 @@ namespace GBC_Travel_Group23.Models
         [Required] public DateTime ArrivalDate { get; set; }
         [Required] public int TotalSeats { get; set; }
         [Required] public double Price { get; set; }
+
+        [InverseProperty("Flight")]
+        public ICollection<Booking>? Bookings { get; set; }
     }
 }

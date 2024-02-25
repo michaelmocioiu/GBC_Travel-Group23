@@ -12,8 +12,6 @@ namespace GBC_Travel_Group23
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            builder.Services.AddScoped<RoomBookingService>(); // Register your RoomBookingService for DI
-
 
             var app = builder.Build();
 

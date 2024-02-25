@@ -6,18 +6,18 @@ namespace GBC_Travel_Group23.Models
 {
     public class Booking
     {
-        [Key]
-        public int Id { get; set; }
-        
+        [Key] public int Id { get; set; }
+
         [Required]
+        [ForeignKey("Client")]
         public int ClientId { get; set; }
+        public Client Client { get; set; } = new Client();
 
         [Required]
         [RegularExpression("(hotelroom|flight|car)", ErrorMessage = "The Type must be either flight, hotel, or car!")]
         public string Type { get; set; } = "hotelroom";
 
-        [Required]
-        public int ServiceId { get; set; }
+        [Required] public int ServiceId { get; set; }
 
         [Required] public int GuestCount { get; set; }
 
@@ -29,14 +29,11 @@ namespace GBC_Travel_Group23.Models
         [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
 
-        [NotMapped]
-        public Flight? Flight { get; private set; }
+        [NotMapped] public Flight? Flight { get; private set; }
 
-        [NotMapped]
-        public Hotel? Hotel { get; private set; }
+        [NotMapped] public HotelRoom? HotelRoom { get; private set; }
 
-        [NotMapped]
-        public CarRental? CarRental { get; private set; }
+        [NotMapped] public CarRental? CarRental { get; private set; }
 
 
         public void SetService(object service)
@@ -48,10 +45,10 @@ namespace GBC_Travel_Group23.Models
                     Flight = flight;
                     ServiceId = flight.Id;
                     break;
-                case Hotel hotel:
-                    Type = "Hotel";
-                    Hotel = hotel;
-                    ServiceId = hotel.Id;
+                case HotelRoom hotelroom:
+                    Type = "HotelRoom";
+                    HotelRoom = hotelroom;
+                    ServiceId = hotelroom.Id;
                     break;
                 case CarRental carRental:
                     Type = "CarRental";

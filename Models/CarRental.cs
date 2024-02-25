@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace GBC_Travel_Group23.Models
 {
     public class CarRental
@@ -12,6 +13,8 @@ namespace GBC_Travel_Group23.Models
         [Required] public int Capacity { get; set; }
         [Required] public int Count { get; set; }
         [Required] public double Rate { get; set; }
-        
+
+        [InverseProperty("CarRental")]
+        public ICollection<Booking>? Bookings { get; set; }
     }
 }
