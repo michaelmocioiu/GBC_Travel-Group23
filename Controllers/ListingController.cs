@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using GBC_Travel_Group23.Data;
 using GBC_Travel_Group23.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,7 +33,7 @@ namespace GBC_Travel_Group23.Controllers
         // GET: Listing/CarRentals
         public async Task<IActionResult> CarRentals()
         {
-            var carRentals = await _context.CarRental.ToListAsync();
+            var carRentals = await _context.CarRentals.ToListAsync();
             return View(carRentals);
         }
     }

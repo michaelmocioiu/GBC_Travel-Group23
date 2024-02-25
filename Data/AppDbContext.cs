@@ -76,7 +76,14 @@ namespace GBC_Travel_Group23.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(modelBuilder);
-            //Seed Data
+
+            SeedData(modelBuilder);
+       
+
+
+        }
+        private void SeedData(ModelBuilder modelBuilder)
+        {
             List<Client> clients = new List<Client>
             {
                 new Client { Id = 10001, FullName = "Frederica Cottem", Email = "fcottem0@linkedin.com", Phone = "+7 (375) 654-3590" },
@@ -90,7 +97,7 @@ namespace GBC_Travel_Group23.Data
                 new Client { Id = 10009, FullName = "Brade Brymham", Email = "bbrymham8@usgs.gov", Phone = "+55 (979) 581-5768" }
             };
 
-            List<Location> Locations = new List<Location>
+            List<Location> locations = new List<Location>
             {
                 new Location { Id = 1001, Country = "USA", City = "New York", Region = "NY", AirportCode = "JFK" },
                 new Location { Id = 1002, Country = "Canada", City = "Toronto", Region = "ON", AirportCode = "YYZ" },
@@ -109,20 +116,17 @@ namespace GBC_Travel_Group23.Data
                 new Location { Id = 1015, Country = "South Korea", City = "Seoul", Region = "11", AirportCode = "ICN" }
             };
 
-            List<Hotel> Hotels = GenerateHotels(Locations);
+            List<Hotel> hotels = GenerateHotels(locations);
 
-            List<CarRental> CarRentals = GenerateCarRentals(Locations);
+            List<CarRental> carRentals = GenerateCarRentals(locations);
 
             modelBuilder.Entity<Client>().HasData(clients);
 
-            modelBuilder.Entity<Location>().HasData(Locations);
+            modelBuilder.Entity<Location>().HasData(locations);
 
-            modelBuilder.Entity<CarRental>().HasData(CarRentals);
+            modelBuilder.Entity<CarRental>().HasData(carRentals);
 
-            modelBuilder.Entity<Hotel>().HasData(Hotels);
-       
-
-
+            modelBuilder.Entity<Hotel>().HasData(hotels);
         }
 
         public List<CarRental> GenerateCarRentals(List<Location> locations)
@@ -157,19 +161,17 @@ namespace GBC_Travel_Group23.Data
                     int count = random.Next(1, 31);
                     double rate = random.NextDouble() * (300.0 - 60.0) + 60.0;
 
-                    CarRental carRental = new CarRental
+                    CarRentals.Add( new CarRental
                     {
                         Id = nextId++,
+                        LocationId = location.Id,
                         Make = seedCars[randCarInx, 0],
                         Model = seedCars[randCarInx, 1],
                         CarYear = int.Parse(seedCars[randCarInx, 2]),
                         Capacity = int.Parse(seedCars[randCarInx, 3]),
                         Count = count,
                         Rate = rate
-                    };
-                    carRental.LocationId = location.Id;
-                    carRental.Location = location;
-                    carRentals.Add(carRental);
+                    });
                 }
             }
             return carRentals;
