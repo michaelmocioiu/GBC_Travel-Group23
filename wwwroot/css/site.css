@@ -21,7 +21,6 @@ body {
   margin-bottom: 60px;
 }
 
-
 .tabbed-search {
     background-color: #fff;
     border-radius: 8px;
@@ -94,6 +93,41 @@ button[type="submit"] {
     border-radius: 4px;
     cursor: pointer;
 }
+/* Additional styling for form fields and buttons */
+.search-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+    .search-form > div {
+        flex: 1; /* Each child div will grow equally */
+    }
+
+    .search-form input[type="text"],
+    .search-form button[type="submit"] {
+        width: 100%;
+        padding: 0.5rem;
+        margin-bottom: 0.5rem; /* Spacing between elements */
+    }
+
+    /* Align the submit button to the right */
+    .search-form button[type="submit"] {
+        margin-left: auto; /* Push the button to the right */
+    }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .search-form {
+        flex-direction: column;
+    }
+
+        .search-form button[type="submit"] {
+            margin-left: 0;
+        }
+}
+
 
 
 .trip-type label {
@@ -107,3 +141,5 @@ button[type="submit"] {
     .flight-dates div {
         margin-bottom: 5px;
     }
+
+
