@@ -7,8 +7,8 @@ namespace GBC_Travel_Group23.Models
     {
         [Key] public int Id { get; set; }
         [Required] public string FullName { get; set; } = string.Empty;
-        [EmailAddress] public string Email { get; set; } = string.Empty;
-        [Phone] public string Phone { get; set; } = string.Empty;
+        [Required][EmailAddress] public string Email { get; set; } = string.Empty;
+        [Required][Phone] public string Phone { get; set; } = string.Empty;
 
         [InverseProperty("Client")]
         public ICollection<Booking>? Bookings { get; set; }
