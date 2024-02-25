@@ -48,10 +48,11 @@ namespace GBC_Travel_Group23.Data
                 .HasForeignKey(b => b.ClientId)
                 .OnDelete(DeleteBehavior.Restrict);
             
+            
 
             //Seed Data
             modelBuilder.Entity<Client>().HasData(
-                    new Client { Id = 10000, FullName = "Michael Mocioiu", Email = "michmoc@gmail.com", Phone = "+1 (647) 102-9392"}
+                    new Client { Id = 10000, FullName = "Michael Mocioiu", Email = "michmoc@gmail.com", Phone = "+1 (647) 102-9392"},
                     new Client { Id = 10001, FullName = "Frederica Cottem", Email = "fcottem0@linkedin.com", Phone = "+7 (375) 654-3590" },
                     new Client { Id = 10002, FullName = "Annabella Comellini", Email = "acomellini1@cnet.com", Phone = "+93 (923) 606-7690" },
                     new Client { Id = 10003, FullName = "Redd Daniel", Email = "rdaniel2@sfgate.com", Phone = "+86 (422) 538-4788" },
