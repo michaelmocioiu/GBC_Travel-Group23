@@ -6,13 +6,14 @@
     <title>@ViewData["Title"] - GBC_Travel_Group23</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/GBC_Travel_Group23.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">GBC_Travel_Group23</a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">GBC_Travel_Group23</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,15 +21,88 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="About">About</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Trips">My Trips</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Book Now">Book Now</a>
+                        </li>
+                        
                     </ul>
                 </div>
             </div>
         </nav>
+        <div class="tabbed-search">
+            <ul class="tab-nav">
+                <li class="active"><a href="#flights-tab">Flights</a></li>
+                <li><a href="#hotels-tab">Hotels</a></li>
+                <li><a href="#car-rentals-tab">Car Rentals</a></li>
+            </ul>
+
+            <div id="flights-tab" class="tab active">
+                <form id="flights-search-form">
+                    <div class="trip-type">
+                        <input type="radio" id="round-trip" name="trip_type" value="roundtrip" checked>
+                        <label for="round-trip">Round Trip</label>
+
+                        <input type="radio" id="one-way" name="trip_type" value="oneway">
+                        <label for="one-way">One Way</label>
+
+                    </div>
+
+                    <div class="flight-dates">
+                        <div class="departure-date">
+                            <label for="departure-date">Departure Date</label>
+                            <input type="text" id="departure-date" placeholder="Select Departure Date">
+                        </div>
+
+                        <div class="return-date">
+                            <label for="return-date">Return Date</label>
+                            <input type="text" id="return-date" placeholder="Select Return Date">
+                        </div>
+                    </div>
+
+                    <!-- Other flight search fields -->
+                    <button type="submit">Search Flights</button>
+                </form>
+            </div>
+
+                <!-- Hotels Tab -->
+                <div id="hotels-tab" class="tab">
+                    <!-- Hotel search fields -->
+                    <!-- ... (your existing hotel search fields) -->
+                    <!-- Add country and city inputs for Hotels tab here -->
+                    <input type="text" placeholder="Country" id="hotel-country">
+                    <input type="text" placeholder="City" id="hotel-city">
+                    <!-- The date fields should use a datepicker plugin -->
+                    <input type="text" placeholder="Check In" id="hotel-check-in">
+                    <input type="text" placeholder="Check Out" id="hotel-check-out">
+                    <button type="submit">Search Hotels</button>
+                </div>
+
+                <!-- Car Rentals Tab -->
+                <div id="car-rentals-tab" class="tab">
+                    <form id="car-rentals-search-form">
+                        <!-- Car rental search fields -->
+                        <input type="text" placeholder="Country" id="car-rental-country">
+                        <input type="text" placeholder="City" id="car-rental-city">
+                        <!-- The date fields should use a datepicker plugin -->
+                        <input type="text" placeholder="Pick-Up Date" id="car-rental-pick-up-date">
+                        <input type="text" placeholder="Drop-Off Date" id="car-rental-drop-off-date">
+                        <button type="submit">Search Car Rentals</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -38,13 +112,15 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - GBC_Travel_Group23 - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; @DateTime.Now.Year - GBC_Travel_Group23 - <a asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
