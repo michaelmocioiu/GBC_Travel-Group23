@@ -77,7 +77,7 @@ namespace GBC_Travel_Group23.Data
 
             base.OnModelCreating(modelBuilder);
 
-            SeedData(modelBuilder);
+            //SeedData(modelBuilder);
        
 
 
