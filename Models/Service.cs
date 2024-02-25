@@ -8,7 +8,5 @@ namespace GBC_Travel_Group23.Models
         [Required] public string LocationCountry { get; set; }
         [Required] public string ProviderName { get; set; }
         [Required] public string Description { get; set; }
-        [DataType(DataType.Date)] public DateTime StartDate { get; set; }
-        [DataType(DataType.Date)] public DateTime EndDate { get; set; }
     }
 }

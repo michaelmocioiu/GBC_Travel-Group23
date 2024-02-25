@@ -4,11 +4,16 @@
     {
         public string CabinType { get; set; }
         public int MaxSeating { get; set; }
-        public int AvailableSeating { get; set; }
+        public int AvailableSeating { get ; private set; }
         public double SeatPrice { get; set; }
+
+        public FlightCabin()
+        {
+            AvailableSeating = MaxSeating;
+        }
         public void BookSeat()
         {
-            if (AvailableSeating > 0)AvailableSeating--;
+            if (AvailableSeating > 0) AvailableSeating--;
         }
     }
 }

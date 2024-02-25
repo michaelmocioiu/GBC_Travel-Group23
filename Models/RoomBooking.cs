@@ -16,8 +16,20 @@ namespace GBC_Travel_Group23.Models
         public int ClientId { get; set; }
         public Client Client { get; set; }
 
+        public double TotalPrice
+        {
+            get {
+                int nightcount = (int)(EndDate - StartDate).TotalDays + (EndDate.TimeOfDay < StartDate.TimeOfDay ? 1 : 0);
+                return Math.Round(nightcount * HotelRoom.Rate, 2); 
+            }
+        }
        
 
     }
 
+    public class BookingManager
+    {
+        public List<Booking> Bookings { get; set; }
+        
+    }
 }

@@ -17,4 +17,10 @@ namespace GBC_Travel_Group23.Models
         public int FlightId { get; set; }
         public int CabinId { get; set; }
     }
+
+    public class CarRentalBooking : Booking
+    {
+        public CarRental CarRental { get; set; }
+
+    }
 }
