@@ -3,8 +3,7 @@ namespace GBC_Travel_Group23.Models
 {
     public class Flight : Service
     {
-        public string Manufacturer { get; set; }
-        public string Make { get; set; }
+        [Required] public string Plane { get; set; }
         [Required] public string DepartureAirportCode { get; set; }
         [Required] public string DepartureCity { get; set; }
         [Required] public string DepartureCountry { get; set; }

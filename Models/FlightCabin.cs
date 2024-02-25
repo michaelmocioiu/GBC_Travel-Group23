@@ -1,12 +1,14 @@
-﻿namespace GBC_Travel_Group23.Models
+﻿using System.ComponentModel.DataAnnotations;
+namespace GBC_Travel_Group23.Models
 {
     public class FlightCabin
     {
-        public string CabinType { get; set; }
-        public int MaxSeating { get; set; }
-        public int AvailableSeating { get ; private set; }
-        public double SeatPrice { get; set; }
-
+        public int Id { get; set; }
+        [Required] public int FlightId { get;}
+        [Required] public string CabinType { get; set; }
+        [Required] public int MaxSeating { get; set; }
+        [Required] public int AvailableSeating { get ; private set; }
+        [Required] public double SeatPrice { get; set; }
         public FlightCabin()
         {
             AvailableSeating = MaxSeating;
