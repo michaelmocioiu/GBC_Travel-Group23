@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <Folder Include="Views\Booking\" />
-    <Folder Include="Views\Listing\" />
     <Folder Include="Views\Search\" />
   </ItemGroup>
 
