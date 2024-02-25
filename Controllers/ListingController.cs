@@ -33,8 +33,15 @@ namespace GBC_Travel_Group23.Controllers
         // GET: Listing/CarRentals
         public async Task<IActionResult> CarRentals()
         {
-            var carRentals = await _context.CarRentals.ToListAsync();
+            var carRentals = await _context.CarRental.ToListAsync();
             return View(carRentals);
+        }
+
+        // GET: Listing/HotelRoom
+        public async Task<IActionResult> HotelRoom()
+        {
+            var hotelRooms = await _context.HotelRooms.ToListAsync();
+            return View(hotelRooms);
         }
     }
 }
