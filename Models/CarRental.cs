@@ -1,12 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
 namespace GBC_Travel_Group23.Models
 {
-    public class CarRental : Service
+    public class CarRental
     {
-        public int Id { get; set; }
-        [Required] public string CarBrand { get; set; }
-        [Required] public string CarModel {  get; set; }
-        [Required] public string CarYear { get; set; }
-        [Required] public double DailyRate { get; set; }
+        [Key] public int Id { get; set; }
+        [Required] public string Country { get; set; } = string.Empty;
+        [Required] public string City { get; set; } = string.Empty;
+        [Required] public string CarBrand { get; set; } = string.Empty;
+        [Required] public string CarModel { get; set; } = string.Empty;
+        [Required] public int CarYear { get; set; }
+        [Required] public int Capacity { get; set; }
+        [Required] public int Count { get; set; }
+        [Required] public double Rate { get; set; }
+        
     }
 }

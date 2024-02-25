@@ -3,12 +3,12 @@ namespace GBC_Travel_Group23.Models
 {
     public class HotelRoom
     {
-        public int Id { get; set; }
-        [Required] public int RoomNumber { get; set; }
-        [Required] public string[] Beds { get; set; }
-        [Required] public int BathCount { get; set; }
-        [Required] public int Capacity { get; set; }
-        [Required] public string[] Amenities { get; set; }
+        [Key] public int Id { get; set; }
+        [Required] public int HotelId { get; set; }
+        [Required] public string RoomName { get; set; } = string.Empty;
+        [Required] public int MaxOccupants { get; set; }
+        [Required] public string[] Amenities { get; set; } = [];
+        [Required] public int RoomCount { get; set; }
         [Required] public double Rate { get; set; }
     }
 }
