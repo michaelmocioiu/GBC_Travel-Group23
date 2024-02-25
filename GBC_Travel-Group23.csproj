@@ -8,9 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Home\" />
     <Folder Include="Views\Booking\" />
-    <Folder Include="Views\Listing\" />
     <Folder Include="Views\Search\" />
   </ItemGroup>
 
