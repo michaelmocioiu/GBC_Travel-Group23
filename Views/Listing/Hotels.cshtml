@@ -1,0 +1,29 @@
+﻿@model IEnumerable<GBC_Travel_Group23.Models.Hotel>
+
+@{
+    ViewData["Title"] = "Hotel Listings";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Hotel Name</th>
+            <th>Location</th>
+            <th>Rating</th>
+            <th>Rooms Available</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var hotel in Model)
+        {
+        <tr>
+            <td>@hotel.Name</td>
+            <td>@hotel.Location</td>
+            <td>@hotel.Rating</td>
+            <td>@hotel.Rooms.Count</td>
+        </tr>
+        }
+    </tbody>
+</table>

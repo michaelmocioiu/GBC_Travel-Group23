@@ -1,0 +1,29 @@
+﻿@model IEnumerable<GBC_Travel_Group23.Models.CarRental>
+
+@{
+    ViewData["Title"] = "Car Rental Listings";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Company</th>
+            <th>Model</th>
+            <th>Price Per Day</th>
+            <th>Location</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var carRental in Model)
+        {
+        <tr>
+            <td>@carRental.Company</td>
+            <td>@carRental.Model</td>
+            <td>@carRental.PricePerDay.ToString("C")</td>
+            <td>@carRental.Location</td>
+        </tr>
+        }
+    </tbody>
+</table>
