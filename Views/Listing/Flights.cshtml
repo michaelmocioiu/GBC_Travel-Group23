@@ -22,8 +22,8 @@
         <tr>
             <td>@flight.Airline</td>
             <td>@flight.FlightCode</td>
-            <td>@flight.DepartureCity - @flight.DepartureDate.ToString("g")</td>
-            <td>@flight.ArrivalCity - @flight.ArrivalDate.ToString("g")</td>
+            <td>@flight.DepartureLocation.City - @flight.DepartureDate.ToString("g")</td>
+            <td>@flight.ArrivalLocation.City - @flight.ArrivalDate.ToString("g")</td>
             <td>@flight.Price.ToString("C")</td>
         </tr>
         }

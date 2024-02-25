@@ -8,15 +8,23 @@ namespace GBC_Travel_Group23.Models
         [Required] public string Airline { get; set; } = string.Empty;
         [Required] public string Plane { get; set; } = string.Empty;
         [Required] public string FlightCode { get; set; } = string.Empty;
-        [Required] public string DepartureAirportCode { get; set; } = string.Empty;
-        [Required] public string DepartureCity { get; set; } = string.Empty;
-        [Required] public string DepartureCountry { get; set; } = string.Empty;
+
+        [Required]
+        [ForeignKey("DepartureLocation")]
+        public int DepartureLocationId { get; set; }
+        public Location DepartureLocation { get; set; } = new Location();
+
+        [Required]
+        [ForeignKey("ArrivalLocation")]
+        public int ArrivalLocationId { get; set; }
+        public Location ArrivalLocation { get; set; } = new Location();
+
         [Required] public DateTime DepartureDate { get; set; }
-        [Required] public string ArrivalAirportCode { get; set; } = string.Empty;
-        [Required] public string ArrivalCity { get; set; } = string.Empty;
-        [Required] public string ArrivalCountry { get; set; } = string.Empty;
+        
         [Required] public DateTime ArrivalDate { get; set; }
+        
         [Required] public int TotalSeats { get; set; }
+        
         [Required] public double Price { get; set; }
 
         [InverseProperty("Flight")]

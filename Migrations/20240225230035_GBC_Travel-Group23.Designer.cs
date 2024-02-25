@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GBC_Travel_Group23.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240225110542_GBC_Travel-Group23")]
+    [Migration("20240225230035_GBC_Travel-Group23")]
     partial class GBC_TravelGroup23
     {
         /// <inheritdoc />
@@ -72,25 +72,20 @@ namespace GBC_Travel_Group23.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
 
-                    b.Property<string>("CarBrand")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CarModel")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("CarYear")
                         .HasColumnType("int");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
-                    b.Property<string>("Country")
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Make")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Model")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -99,7 +94,9 @@ namespace GBC_Travel_Group23.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CarRental");
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("CarRentals");
                 });
 
             modelBuilder.Entity("GBC_Travel_Group23.Models.Client", b =>
@@ -139,35 +136,17 @@ namespace GBC_Travel_Group23.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ArrivalAirportCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ArrivalCity")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ArrivalCountry")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("ArrivalDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DepartureAirportCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DepartureCity")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DepartureCountry")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ArrivalLocationId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DepartureDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("DepartureLocationId")
+                        .HasColumnType("int");
 
                     b.Property<string>("FlightCode")
                         .IsRequired()
@@ -184,6 +163,10 @@ namespace GBC_Travel_Group23.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ArrivalLocationId");
+
+                    b.HasIndex("DepartureLocationId");
 
                     b.ToTable("Flights");
                 });
@@ -204,15 +187,16 @@ namespace GBC_Travel_Group23.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Country")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LocationId");
 
                     b.ToTable("Hotels");
                 });
@@ -252,6 +236,35 @@ namespace GBC_Travel_Group23.Migrations
                     b.ToTable("HotelRooms");
                 });
 
+            modelBuilder.Entity("GBC_Travel_Group23.Models.Location", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AirportCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Region")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Locations");
+                });
+
             modelBuilder.Entity("GBC_Travel_Group23.Models.Booking", b =>
                 {
                     b.HasOne("GBC_Travel_Group23.Models.Client", "Client")
@@ -285,6 +298,47 @@ namespace GBC_Travel_Group23.Migrations
                     b.Navigation("Flight");
 
                     b.Navigation("HotelRoom");
+                });
+
+            modelBuilder.Entity("GBC_Travel_Group23.Models.CarRental", b =>
+                {
+                    b.HasOne("GBC_Travel_Group23.Models.Location", "Location")
+                        .WithMany("CarRentals")
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Location");
+                });
+
+            modelBuilder.Entity("GBC_Travel_Group23.Models.Flight", b =>
+                {
+                    b.HasOne("GBC_Travel_Group23.Models.Location", "ArrivalLocation")
+                        .WithMany("ArrivalFlights")
+                        .HasForeignKey("ArrivalLocationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("GBC_Travel_Group23.Models.Location", "DepartureLocation")
+                        .WithMany("DepartureFlights")
+                        .HasForeignKey("DepartureLocationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("ArrivalLocation");
+
+                    b.Navigation("DepartureLocation");
+                });
+
+            modelBuilder.Entity("GBC_Travel_Group23.Models.Hotel", b =>
+                {
+                    b.HasOne("GBC_Travel_Group23.Models.Location", "Location")
+                        .WithMany("Hotels")
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Location");
                 });
 
             modelBuilder.Entity("GBC_Travel_Group23.Models.HotelRoom", b =>
@@ -321,6 +375,17 @@ namespace GBC_Travel_Group23.Migrations
             modelBuilder.Entity("GBC_Travel_Group23.Models.HotelRoom", b =>
                 {
                     b.Navigation("Bookings");
+                });
+
+            modelBuilder.Entity("GBC_Travel_Group23.Models.Location", b =>
+                {
+                    b.Navigation("ArrivalFlights");
+
+                    b.Navigation("CarRentals");
+
+                    b.Navigation("DepartureFlights");
+
+                    b.Navigation("Hotels");
                 });
 #pragma warning restore 612, 618
         }
